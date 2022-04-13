@@ -1,17 +1,47 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Home } from './container';
+import { useNavigation } from '@react-navigation/native';
+import { AppRoutes, AppStackParamsList } from '../../navigation/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { colors } from '../../styles';
 
-import { Container, Feature, Text } from './styles';
+interface HomeScreenProps {
+  navigation: NativeStackNavigationProp<AppStackParamsList, 'App.ReadTag'>;
+}
 
-const Home = () => {
+const HomeScreen = ({ navigation }: HomeScreenProps) => {
+  const featuresList = [
+    {
+      name: 'Ler',
+      icon: (
+        <MaterialCommunityIcons
+          color={colors.secondaryColor}
+          name="text-box-search-outline"
+          size={50}
+        />
+      ),
+    },
+    {
+      name: 'Escrever',
+      icon: (
+        <FontAwesome
+          color={colors.secondaryColor}
+          name="pencil-square-o"
+          size={50}
+        />
+      ),
+    },
+  ];
+
+  const handleOnGoToReadTag = () => {
+    navigation.navigate(AppRoutes.ReadTag);
+  };
+
   return (
-    <Container>
-      <Feature>
-        <Icon name="text-box-search-outline" />
-        <Text>Ler</Text>
-      </Feature>
-    </Container>
+    <Home featuresList={featuresList} onGoToReadTag={handleOnGoToReadTag} />
   );
 };
 
-export { Home };
+export { HomeScreen };

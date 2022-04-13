@@ -11,6 +11,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.soloader.SoLoader;
 import com.nfcmanager.newarchitecture.MainApplicationReactNativeHost;
+import com.airbnb.android.react.lottie.LottiePackage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
                     // Packages that cannot be autolinked yet can be added manually here, for example:
                     // packages.add(new MyReactNativePackage());
                     packages.add(new CustomPackage());
+                    packages.add(new LottiePackage());
                     return packages;
                 }
 

@@ -20,7 +20,7 @@ public class CustomPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        modules.add(new NfcManagerModule(reactContext));
+        // modules.add(new NfcManagerModule(reactContext));
 
         return modules;
     }
