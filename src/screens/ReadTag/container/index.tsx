@@ -1,7 +1,7 @@
 import AnimatedLottieView from 'lottie-react-native';
 import React from 'react';
 import { Container, Text } from './styles';
-import readingNfcAnimation from '../assets/readingNfc.json';
+import readingNfcAnimation from '../../../assets/readingNfc.json';
 import { View } from 'react-native';
 
 const ReadTag = () => (

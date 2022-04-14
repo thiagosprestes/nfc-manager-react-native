@@ -2,7 +2,6 @@ import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Home } from './container';
-import { useNavigation } from '@react-navigation/native';
 import { AppRoutes, AppStackParamsList } from '../../navigation/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors } from '../../styles';
