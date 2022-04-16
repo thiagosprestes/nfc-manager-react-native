@@ -1,8 +1,8 @@
 import React from 'react';
-import { Container, Description, EnableNfcInfo, Title } from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from '../../../components/Button';
 import { colors } from '../../../styles';
+import { Container, Description, EnableNfcInfo, Title } from './styles';
 
 interface EnableNfcProps {
   onGoToEnableNfc: () => void;

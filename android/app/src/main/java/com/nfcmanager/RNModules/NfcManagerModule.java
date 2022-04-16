@@ -30,6 +30,10 @@ import com.facebook.react.bridge.ReactMethod;
 
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
+import com.facebook.react.bridge.Promise;
+
+import android.provider.Settings;
+
 public class NfcManagerModule extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
     private final Context context;
 
@@ -80,6 +84,29 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
         Activity currentActivity = getCurrentActivity();
 
         nfcAdapter.disableReaderMode(currentActivity);
+    }
+
+    @ReactMethod
+    private void deviceHasNfc(Promise promise) {
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
+
+        promise.resolve(nfcAdapter != null)
+    }
+
+    @ReactMethod
+    private void isNfcEnabled(Promise promise) {
+        NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
+
+        promise.resolve(nfcAdapter.isEnabled());
+    }
+
+    @ReactMethod
+    private void onGoToEnableNfc() {
+        Activity currentActivity = getCurrentActivity();
+
+        Intent intent = new Intent(Settings.ACTION_NFC_SETTINGS);
+
+        currentActivity.startActivity(intent);
     }
 
     @Override
