@@ -9,9 +9,10 @@ import { Error } from '../../../../components/Error';
 interface ReadTagProps {
   componentStates: ComponentStates;
   errorType: ErrorType;
+  onRetryRead: () => void;
 }
 
-const ReadTag = ({ componentStates, errorType }: ReadTagProps) => {
+const ReadTag = ({ componentStates, errorType, onRetryRead }: ReadTagProps) => {
   const DefaultState = (
     <>
       <View style={{ height: 200, transform: [{ rotate: '90deg' }] }}>
@@ -33,7 +34,7 @@ const ReadTag = ({ componentStates, errorType }: ReadTagProps) => {
           [ComponentStates.default]: DefaultState,
           [ComponentStates.loading]: <></>,
           [ComponentStates.error]: (
-            <Error type={errorType} onRetry={() => undefined} />
+            <Error type={errorType} onRetry={onRetryRead} />
           ),
         }[componentStates]
       }

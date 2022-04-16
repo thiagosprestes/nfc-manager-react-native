@@ -1,4 +1,8 @@
 import React from 'react';
+import { ActivityIndicator } from 'react-native';
+import { DeviceNotHaveNfc } from '../../../components/DeviceNotHaveNfc';
+import { colors } from '../../../styles';
+import { ComponentStates } from '../../../types';
 import { FeaturesListItem } from '../types';
 import {
   Container,
@@ -9,12 +13,13 @@ import {
 } from './styles';
 
 interface HomeProps {
+  componentState: ComponentStates;
   featuresList: FeaturesListItem[];
   onGoToReadTag: () => void;
 }
 
-const Home = ({ featuresList, onGoToReadTag }: HomeProps) => (
-  <Container>
+const Home = ({ componentState, featuresList, onGoToReadTag }: HomeProps) => {
+  const DefaultState = (
     <FeaturesList
       data={featuresList}
       numColumns={2}
@@ -27,7 +32,25 @@ const Home = ({ featuresList, onGoToReadTag }: HomeProps) => (
         </Feature>
       )}
     />
-  </Container>
-);
+  );
+
+  const NotHaveNfcAdapterState = <DeviceNotHaveNfc />;
+
+  const LoadingState = (
+    <ActivityIndicator color={colors.secondaryColor} size={52} />
+  );
+
+  return (
+    <Container>
+      {
+        {
+          [ComponentStates.default]: DefaultState,
+          [ComponentStates.error]: NotHaveNfcAdapterState,
+          [ComponentStates.loading]: LoadingState,
+        }[componentState]
+      }
+    </Container>
+  );
+};
 
 export { Home };

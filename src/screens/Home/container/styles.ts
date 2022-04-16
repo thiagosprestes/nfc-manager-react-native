@@ -9,6 +9,7 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   padding: 20px;
   background-color: ${colors.primaryColor};
+  justify-content: center;
 `;
 
 export const Feature = styled.TouchableOpacity`

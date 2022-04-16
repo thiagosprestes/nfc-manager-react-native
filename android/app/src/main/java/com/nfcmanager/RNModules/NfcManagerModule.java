@@ -90,7 +90,7 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
     private void deviceHasNfc(Promise promise) {
         NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
 
-        promise.resolve(nfcAdapter != null)
+        promise.resolve(nfcAdapter != null);
     }
 
     @ReactMethod

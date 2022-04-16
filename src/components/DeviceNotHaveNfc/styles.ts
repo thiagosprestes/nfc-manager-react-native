@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
-import { Text } from '../../../components/Text/styles';
-import { colors, defaultPadding } from '../../../styles';
+import { Text } from '../Text/styles';
+import { colors, defaultPadding } from '../../styles';
 
 export const Container = styled.SafeAreaView`
   flex: 1;

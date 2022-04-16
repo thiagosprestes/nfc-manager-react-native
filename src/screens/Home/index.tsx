@@ -1,17 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Home } from './container';
 import { AppRoutes, AppStackParamsList } from '../../navigation/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { colors } from '../../styles';
-import { isNfcEnabled } from '../../utils/nativeModules/nfcManager';
+import {
+  deviceHasNfc,
+  isNfcEnabled,
+} from '../../utils/nativeModules/nfcManager';
+import { ComponentStates } from '../../types';
 
 interface HomeScreenProps {
   navigation: NativeStackNavigationProp<AppStackParamsList, 'App.ReadTag'>;
 }
 
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
+  const [componentState, setComponentState] = useState(ComponentStates.loading);
+
   const featuresList = [
     {
       name: 'Ler',
@@ -43,12 +49,24 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
     navigation.navigate(AppRoutes.ReadTag);
   };
 
+  const hasNfcAdapter = async () => {
+    const haveNfcAdapter = await deviceHasNfc();
+
+    setComponentState(
+      haveNfcAdapter ? ComponentStates.default : ComponentStates.error,
+    );
+  };
+
   useEffect(() => {
-    navigation.navigate(AppRoutes.DeviceNotHaveNfc);
+    hasNfcAdapter();
   }, []);
 
   return (
-    <Home featuresList={featuresList} onGoToReadTag={handleOnGoToReadTag} />
+    <Home
+      componentState={componentState}
+      featuresList={featuresList}
+      onGoToReadTag={handleOnGoToReadTag}
+    />
   );
 };
 

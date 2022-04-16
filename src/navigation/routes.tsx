@@ -12,7 +12,6 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { colors } from '../styles';
 import { TouchableOpacity } from 'react-native';
 import { EnableNfcScreen } from '../screens/EnableNfc';
-import { DeviceNotHaveNfcScreen } from '../screens/DeviceNotHaveNfc';
 
 const tagNavigationOptions = (
   navigation: NativeStackNavigationProp<{}>,
@@ -39,10 +38,7 @@ const tagNavigationOptions = (
 const Stack = createNativeStackNavigator<AppStackParamsList>();
 
 const Routes = () => (
-  <Stack.Navigator
-    screenOptions={{ headerShown: false }}
-    // initialRouteName={AppRoutes.EnableNfc}
-  >
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name={AppRoutes.Home} component={HomeScreen} />
     <Stack.Group
       screenOptions={({ navigation }) => tagNavigationOptions(navigation)}>
@@ -57,10 +53,6 @@ const Routes = () => (
       options={({ navigation }) => tagNavigationOptions(navigation)}
       name={AppRoutes.EnableNfc}
       component={EnableNfcScreen}
-    />
-    <Stack.Screen
-      name={AppRoutes.DeviceNotHaveNfc}
-      component={DeviceNotHaveNfcScreen}
     />
   </Stack.Navigator>
 );

@@ -10,6 +10,10 @@ export const registerNfcEvent = () => {
   return NfcManagerModule.registerNfcEvent();
 };
 
+export const unregisterNfcEvent = () => {
+  return NfcManagerModule.unregisterNfcEvent();
+};
+
 export const isNfcEnabled = async () => {
   return await NfcManagerModule.isNfcEnabled();
 };
