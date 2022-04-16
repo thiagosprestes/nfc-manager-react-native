@@ -1,10 +1,10 @@
 import AnimatedLottieView from 'lottie-react-native';
 import React from 'react';
 import { Container, Text } from './styles';
-import readingNfcAnimation from '../../../assets/animations/readingNfc.json';
+import readingNfcAnimation from '../../../../assets/animations/readingNfc.json';
 import { View } from 'react-native';
-import { ComponentStates, ErrorType } from '../../../types';
-import { Error } from '../../../components/Error';
+import { ComponentStates, ErrorType } from '../../../../types';
+import { Error } from '../../../../components/Error';
 
 interface ReadTagProps {
   componentStates: ComponentStates;

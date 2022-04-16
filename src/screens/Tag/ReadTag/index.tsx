@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { NativeEventEmitter } from 'react-native';
-import { ComponentStates, ErrorType } from '../../types';
+import { ComponentStates, ErrorType } from '../../../types';
 import {
   NfcManagerModule,
   registerNfcEvent,
-} from '../../utils/nativeModules/nfcManager';
+} from '../../../utils/nativeModules/nfcManager';
 import { ReadTag } from './container';
 
 const ReadTagScreen = () => {

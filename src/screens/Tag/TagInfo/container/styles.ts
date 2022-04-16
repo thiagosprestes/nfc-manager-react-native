@@ -1,12 +1,12 @@
 import styled from 'styled-components/native';
-import { Text } from '../../../components/Text/styles';
-import { colors } from '../../../styles';
+import { Text } from '../../../../components/Text/styles';
+import { colors, defaultPadding } from '../../../../styles';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${colors.primaryColor};
   justify-content: center;
-  padding: 18px 35px;
+  padding: ${defaultPadding}px;
 `;
 
 export const TagInfoItem = styled.View`

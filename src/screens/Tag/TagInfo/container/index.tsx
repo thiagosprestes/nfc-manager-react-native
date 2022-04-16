@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { Container, Info, TagInfoItem, Title, Value } from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { colors } from '../../../styles';
+import { colors } from '../../../../styles';
 
 const TagInfo = () => (
   <Container>

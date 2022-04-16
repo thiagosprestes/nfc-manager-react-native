@@ -5,3 +5,5 @@ export const colors = {
   black: '#000',
   text: '#c7d2df',
 };
+
+export const defaultPadding = 35;

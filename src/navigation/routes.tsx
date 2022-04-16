@@ -6,11 +6,12 @@ import {
 } from '@react-navigation/native-stack';
 import { HomeScreen } from '../screens/Home';
 import { AppRoutes, AppStackParamsList } from './types';
-import { ReadTagScreen } from '../screens/ReadTag';
-import { TagInfoScreen } from '../screens/TagInfo';
+import { ReadTagScreen } from '../screens/Tag/ReadTag';
+import { TagInfoScreen } from '../screens/Tag/TagInfo';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { colors } from '../styles';
 import { TouchableOpacity } from 'react-native';
+import { EnableNfc } from '../screens/enableNfc/container';
 
 const tagNavigationOptions = (
   navigation: NativeStackNavigationProp<{}>,
@@ -37,7 +38,9 @@ const tagNavigationOptions = (
 const Stack = createNativeStackNavigator<AppStackParamsList>();
 
 const Routes = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
+  <Stack.Navigator
+    screenOptions={{ headerShown: false }}
+    initialRouteName={AppRoutes.EnableNfc}>
     <Stack.Screen name={AppRoutes.Home} component={HomeScreen} />
     <Stack.Group
       screenOptions={({ navigation }) => tagNavigationOptions(navigation)}>
@@ -48,6 +51,11 @@ const Routes = () => (
         options={{ title: 'Informações da tag' }}
       />
     </Stack.Group>
+    <Stack.Screen
+      options={({ navigation }) => tagNavigationOptions(navigation)}
+      name={AppRoutes.EnableNfc}
+      component={EnableNfc}
+    />
   </Stack.Navigator>
 );
 

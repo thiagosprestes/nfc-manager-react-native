@@ -1,12 +1,12 @@
 import styled from 'styled-components/native';
-import { Text as TextComponent } from '../../../components/Text/styles';
-import { colors } from '../../../styles';
+import { Text as TextComponent } from '../../../../components/Text/styles';
+import { colors, defaultPadding } from '../../../../styles';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${colors.primaryColor};
   justify-content: center;
-  padding: 35px;
+  padding: ${defaultPadding}px;
 `;
 
 export const Text = styled(TextComponent)`
