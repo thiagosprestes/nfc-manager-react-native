@@ -25,7 +25,6 @@ const ReadTagScreen = ({ navigation }: ReadTagScreenProps) => {
   const eventEmitter = new NativeEventEmitter(NfcManagerModule);
 
   const onFoundTag = () => {
-    unregisterNfcEvent();
     navigation.replace(AppRoutes.TagInfo);
   };
 

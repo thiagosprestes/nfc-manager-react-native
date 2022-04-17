@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.nfc.NdefMessage;
+
 import android.nfc.NfcAdapter;
-import android.nfc.Tag;
+
 import android.nfc.tech.Ndef;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,15 +32,11 @@ import com.facebook.react.bridge.ReactMethod;
 
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-import android.util.Log;
-
 import com.facebook.react.bridge.Promise;
 
 import android.provider.Settings;
 
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 public class NfcManagerModule extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
     private final Context context;
@@ -76,7 +74,7 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
 
         Bundle options = new Bundle();
 
-        options.putInt(NfcAdapter.EXTRA_READER_PRESENCE_CHECK_DELAY, 0);
+        options.putInt(NfcAdapter.EXTRA_READER_PRESENCE_CHECK_DELAY, 1000);
 
         callback = tag -> {
             Ndef mNdef = Ndef.get(tag);
@@ -84,7 +82,7 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
             byte[] tagPayload = mNdefMessage.getRecords()[0].getPayload();
             byte[] tagTextArray = Arrays.copyOfRange(tagPayload, (int) tagPayload[0] + 1, tagPayload.length);
 
-            sendEvent(reactContext, textArray.toString());
+            sendEvent(reactContext, tagTextArray.toString());
         };
 
         nfcAdapter.enableReaderMode(currentActivity, callback, NfcFlags, options);
