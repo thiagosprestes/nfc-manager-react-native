@@ -6,10 +6,10 @@ import android.content.Context;
 
 import android.content.Intent;
 
+import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
-
 import android.nfc.Tag;
-
+import android.nfc.tech.Ndef;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,9 +30,15 @@ import com.facebook.react.bridge.ReactMethod;
 
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
+import android.util.Log;
+
 import com.facebook.react.bridge.Promise;
 
 import android.provider.Settings;
+
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.StandardCharsets;
 
 public class NfcManagerModule extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
     private final Context context;
@@ -54,8 +60,8 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
         return "NfcManagerModule";
     }
 
-    private void sendEvent(ReactContext reactContext, @Nullable Tag tag) {
-        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("hasDiscoveredNfcTag", tag.toString());
+    private void sendEvent(ReactContext reactContext, @Nullable String tag) {
+        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("hasDiscoveredNfcTag", tag);
     }
 
     @ReactMethod
@@ -66,13 +72,20 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
 
         NfcAdapter.ReaderCallback callback;
 
-        int NfcFlags = NfcAdapter.FLAG_READER_NFC_A | NfcAdapter.FLAG_READER_NFC_B | NfcAdapter.FLAG_READER_SKIP_NDEF_CHECK;
+        int NfcFlags = NfcAdapter.FLAG_READER_NFC_A | NfcAdapter.FLAG_READER_NFC_B;
 
         Bundle options = new Bundle();
 
         options.putInt(NfcAdapter.EXTRA_READER_PRESENCE_CHECK_DELAY, 0);
 
-        callback = tag -> sendEvent(reactContext, tag);
+        callback = tag -> {
+            Ndef mNdef = Ndef.get(tag);
+            NdefMessage mNdefMessage = mNdef.getCachedNdefMessage();
+            byte[] tagPayload = mNdefMessage.getRecords()[0].getPayload();
+            byte[] tagTextArray = Arrays.copyOfRange(tagPayload, (int) tagPayload[0] + 1, tagPayload.length);
+
+            sendEvent(reactContext, textArray.toString());
+        };
 
         nfcAdapter.enableReaderMode(currentActivity, callback, NfcFlags, options);
     }
