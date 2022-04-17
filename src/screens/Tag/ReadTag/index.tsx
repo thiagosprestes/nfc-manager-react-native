@@ -24,8 +24,10 @@ const ReadTagScreen = ({ navigation }: ReadTagScreenProps) => {
 
   const eventEmitter = new NativeEventEmitter(NfcManagerModule);
 
-  const onFoundTag = () => {
-    navigation.replace(AppRoutes.TagInfo);
+  const onFoundTag = (tagData: string) => {
+    navigation.replace(AppRoutes.TagInfo, {
+      tagData,
+    });
   };
 
   const handleOnRetryRead = () => {
@@ -43,7 +45,7 @@ const ReadTagScreen = ({ navigation }: ReadTagScreenProps) => {
     const eventListener = eventEmitter.addListener(
       'hasDiscoveredNfcTag',
       event => {
-        onFoundTag();
+        onFoundTag(event);
       },
     );
 

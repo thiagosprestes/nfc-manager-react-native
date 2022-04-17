@@ -1,30 +1,58 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
-import { Container, Info, TagInfoItem, Title, Value } from './styles';
+import {
+  ActionItem,
+  ActionItemName,
+  Actions,
+  Container,
+  Content,
+  DescriptionItem,
+  DescriptionItemValue,
+  Title,
+} from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { colors } from '../../../../styles';
 
-const TagInfo = () => (
+interface TagInfo {
+  onReadAgain: () => void;
+  tagData: string;
+}
+
+const TagInfo = ({ onReadAgain, tagData }: TagInfo) => (
   <Container>
-    <ScrollView>
-      <TagInfoItem>
+    <Content>
+      <MaterialCommunityIcons
+        name="file-check-outline"
+        size={54}
+        color={colors.secondaryColor}
+      />
+      <Title>Tag encontrada com sucesso!</Title>
+      <DescriptionItem>
+        Conteúdo gravado na tag:{' '}
+        <DescriptionItemValue>{tagData}</DescriptionItemValue>
+      </DescriptionItem>
+      <DescriptionItem>
+        Técnologias utilizadas na tag:{' '}
+        <DescriptionItemValue>Ndef</DescriptionItemValue>
+      </DescriptionItem>
+    </Content>
+    <Actions>
+      <ActionItem>
         <MaterialCommunityIcons
-          name="tag-outline"
-          size={36}
+          name="share-variant"
+          size={32}
           color={colors.secondaryColor}
         />
-        <Info>
-          <Title>Tipo</Title>
-          <Value>NPX</Value>
-        </Info>
-      </TagInfoItem>
-      <TagInfoItem>
-        <Info>
-          <Title>Tipo</Title>
-          <Value>NPX</Value>
-        </Info>
-      </TagInfoItem>
-    </ScrollView>
+        <ActionItemName>Compartilhar</ActionItemName>
+      </ActionItem>
+      <ActionItem onPress={onReadAgain}>
+        <MaterialCommunityIcons
+          name="nfc-search-variant"
+          size={32}
+          color={colors.secondaryColor}
+        />
+        <ActionItemName>Ler novamente</ActionItemName>
+      </ActionItem>
+    </Actions>
   </Container>
 );
 

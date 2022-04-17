@@ -82,7 +82,7 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
             byte[] tagPayload = mNdefMessage.getRecords()[0].getPayload();
             byte[] tagTextArray = Arrays.copyOfRange(tagPayload, (int) tagPayload[0] + 1, tagPayload.length);
 
-            sendEvent(reactContext, tagTextArray.toString());
+            sendEvent(reactContext, new String(tagTextArray));
         };
 
         nfcAdapter.enableReaderMode(currentActivity, callback, NfcFlags, options);

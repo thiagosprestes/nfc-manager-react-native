@@ -9,7 +9,9 @@ export const AppRoutes = {
 export type AppStackParamsList = {
   [AppRoutes.Home]: undefined;
   [AppRoutes.ReadTag]: undefined;
-  [AppRoutes.TagInfo]: undefined;
+  [AppRoutes.TagInfo]: {
+    tagData: string;
+  };
   [AppRoutes.EnableNfc]: undefined;
   [AppRoutes.DeviceNotHaveNfc]: undefined;
 };
