@@ -6,6 +6,7 @@ import {
   Container,
   Content,
   DescriptionItem,
+  DescriptionItemLabel,
   DescriptionItemValue,
   Title,
 } from './styles';
@@ -27,12 +28,8 @@ const TagInfo = ({ onReadAgain, tagData }: TagInfo) => (
       />
       <Title>Tag encontrada com sucesso!</Title>
       <DescriptionItem>
-        Conteúdo gravado na tag:{' '}
+        <DescriptionItemLabel>Conteúdo gravado na tag:</DescriptionItemLabel>
         <DescriptionItemValue>{tagData}</DescriptionItemValue>
-      </DescriptionItem>
-      <DescriptionItem>
-        Técnologias utilizadas na tag:{' '}
-        <DescriptionItemValue>Ndef</DescriptionItemValue>
       </DescriptionItem>
     </Content>
     <Actions>

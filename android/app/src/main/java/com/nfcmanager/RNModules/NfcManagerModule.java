@@ -10,6 +10,7 @@ import android.nfc.NdefMessage;
 
 import android.nfc.NfcAdapter;
 
+import android.nfc.Tag;
 import android.nfc.tech.Ndef;
 
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.ActivityEventListener;
 
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -30,6 +32,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 
 import com.facebook.react.bridge.ReactMethod;
 
+import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import com.facebook.react.bridge.Promise;
@@ -58,8 +61,8 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
         return "NfcManagerModule";
     }
 
-    private void sendEvent(ReactContext reactContext, @Nullable String tag) {
-        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("hasDiscoveredNfcTag", tag);
+    private void sendEvent(ReactContext reactContext, @Nullable WritableMap tagData) {
+        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("hasDiscoveredNfcTag", tagData);
     }
 
     @ReactMethod
@@ -82,7 +85,10 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
             byte[] tagPayload = mNdefMessage.getRecords()[0].getPayload();
             byte[] tagTextArray = Arrays.copyOfRange(tagPayload, (int) tagPayload[0] + 1, tagPayload.length);
 
-            sendEvent(reactContext, new String(tagTextArray));
+            WritableMap nfcDataPayload = Arguments.createMap();
+            nfcDataPayload.putString("tagData", new String(tagTextArray));
+
+            sendEvent(reactContext, nfcDataPayload);
         };
 
         nfcAdapter.enableReaderMode(currentActivity, callback, NfcFlags, options);

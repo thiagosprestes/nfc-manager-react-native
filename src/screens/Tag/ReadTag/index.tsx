@@ -45,7 +45,7 @@ const ReadTagScreen = ({ navigation }: ReadTagScreenProps) => {
     const eventListener = eventEmitter.addListener(
       'hasDiscoveredNfcTag',
       event => {
-        onFoundTag(event);
+        onFoundTag(event.tagData);
       },
     );
 

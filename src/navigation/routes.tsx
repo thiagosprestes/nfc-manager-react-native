@@ -11,7 +11,7 @@ import { TagInfoScreen } from '../screens/Tag/TagInfo';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { colors } from '../styles';
 import { TouchableOpacity } from 'react-native';
-import { EnableNfcScreen } from '../screens/EnableNfc';
+import { EnableNfcScreen } from '../screens/enableNfc';
 
 const tagNavigationOptions = (
   navigation: NativeStackNavigationProp<{}>,
