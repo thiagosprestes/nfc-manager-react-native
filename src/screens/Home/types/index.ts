@@ -1,6 +1,11 @@
 import { ReactElement } from 'react';
 
+export enum FeatureOptions {
+  read = 'Ler',
+  write = 'Escrever',
+}
+
 export interface FeaturesListItem {
-  name: string;
+  name: FeatureOptions;
   icon: ReactElement;
 }

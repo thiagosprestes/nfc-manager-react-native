@@ -3,7 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import { DeviceNotHaveNfc } from '../../../components/DeviceNotHaveNfc';
 import { colors } from '../../../styles';
 import { ComponentStates } from '../../../types';
-import { FeaturesListItem } from '../types';
+import { FeatureOptions, FeaturesListItem } from '../types';
 import {
   Container,
   Feature,
@@ -16,9 +16,19 @@ interface HomeProps {
   componentState: ComponentStates;
   featuresList: FeaturesListItem[];
   onGoToReadTag: () => void;
+  onGoToWriteTag: () => void;
 }
 
-const Home = ({ componentState, featuresList, onGoToReadTag }: HomeProps) => {
+const Home = ({
+  componentState,
+  featuresList,
+  onGoToReadTag,
+  onGoToWriteTag,
+}: HomeProps) => {
+  const goToFeature = (name: FeatureOptions) => {
+    return name === FeatureOptions.read ? onGoToReadTag : onGoToWriteTag;
+  };
+
   const DefaultState = (
     <FeaturesList
       data={featuresList}
@@ -26,7 +36,7 @@ const Home = ({ componentState, featuresList, onGoToReadTag }: HomeProps) => {
       columnWrapperStyle={stylesFromStylesheet.featuresListColumn}
       contentContainerStyle={stylesFromStylesheet.featuresListContainer}
       renderItem={({ item }: { item: FeaturesListItem }) => (
-        <Feature onPress={onGoToReadTag}>
+        <Feature onPress={goToFeature(item.name)}>
           {item.icon}
           <Text>{item.name}</Text>
         </Feature>

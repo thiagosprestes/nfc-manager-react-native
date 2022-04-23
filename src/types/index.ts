@@ -15,3 +15,21 @@ export enum ComponentStates {
   loading = 'loading',
   error = 'error',
 }
+
+export enum WriteTagSteps {
+  options = 'options',
+  content = 'content',
+  write = 'write',
+}
+
+export enum WriteOptions {
+  text = 'Texto',
+  url = 'URL',
+  location = 'Localização',
+  phoneNumber = 'Número de telefone',
+}
+
+export interface WriteOptionsListItem {
+  name: WriteOptions;
+  icon: ReactElement;
+}

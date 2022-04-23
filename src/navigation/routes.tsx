@@ -12,6 +12,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { colors } from '../styles';
 import { TouchableOpacity } from 'react-native';
 import { EnableNfcScreen } from '../screens/EnableNfc';
+import { WriteTagScreen } from '../screens/Tag/WriteTag';
 
 const tagNavigationOptions = (
   navigation: NativeStackNavigationProp<{}>,
@@ -53,6 +54,11 @@ const Routes = () => (
       options={({ navigation }) => tagNavigationOptions(navigation)}
       name={AppRoutes.EnableNfc}
       component={EnableNfcScreen}
+    />
+    <Stack.Screen
+      options={({ navigation }) => tagNavigationOptions(navigation)}
+      name={AppRoutes.WriteTag}
+      component={WriteTagScreen}
     />
   </Stack.Navigator>
 );

@@ -10,17 +10,18 @@ import {
   isNfcEnabled,
 } from '../../utils/nativeModules/nfcManager';
 import { ComponentStates } from '../../types';
+import { FeatureOptions } from './types';
 
 interface HomeScreenProps {
   navigation: NativeStackNavigationProp<AppStackParamsList, 'App.ReadTag'>;
 }
 
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
-  const [componentState, setComponentState] = useState(ComponentStates.loading);
+  const [componentState, setComponentState] = useState(ComponentStates.default);
 
   const featuresList = [
     {
-      name: 'Ler',
+      name: FeatureOptions.read,
       icon: (
         <MaterialCommunityIcons
           color={colors.secondaryColor}
@@ -30,7 +31,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
       ),
     },
     {
-      name: 'Escrever',
+      name: FeatureOptions.write,
       icon: (
         <FontAwesome
           color={colors.secondaryColor}
@@ -41,12 +42,23 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
     },
   ];
 
-  const handleOnGoToReadTag = async () => {
+  const verifyIfNfcIsEnabled = async () => {
     if (!(await isNfcEnabled())) {
       navigation.navigate(AppRoutes.EnableNfc);
       return;
     }
+  };
+
+  const handleOnGoToReadTag = async () => {
+    await verifyIfNfcIsEnabled();
+
     navigation.navigate(AppRoutes.ReadTag);
+  };
+
+  const handleOnToWriteTag = async () => {
+    await verifyIfNfcIsEnabled();
+
+    navigation.navigate(AppRoutes.WriteTag);
   };
 
   const hasNfcAdapter = async () => {
@@ -66,6 +78,7 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
       componentState={componentState}
       featuresList={featuresList}
       onGoToReadTag={handleOnGoToReadTag}
+      onGoToWriteTag={handleOnToWriteTag}
     />
   );
 };

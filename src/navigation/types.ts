@@ -4,6 +4,7 @@ export const AppRoutes = {
   TagInfo: 'App.TagInfo',
   EnableNfc: 'App.EnableNfc',
   DeviceNotHaveNfc: 'App.DeviceNotHaveNfc',
+  WriteTag: 'App.WriteTag',
 } as const;
 
 export type AppStackParamsList = {
@@ -14,4 +15,5 @@ export type AppStackParamsList = {
   };
   [AppRoutes.EnableNfc]: undefined;
   [AppRoutes.DeviceNotHaveNfc]: undefined;
+  [AppRoutes.WriteTag]: undefined;
 };

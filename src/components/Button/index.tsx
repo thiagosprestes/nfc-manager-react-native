@@ -1,13 +1,24 @@
 import React, { ReactNode } from 'react';
+import { TouchableOpacityProps } from 'react-native';
 import { ButtonComponent, ButtonComponentText } from './styles';
 
-interface ButtonProps {
+interface ButtonProps extends TouchableOpacityProps {
   children: ReactNode;
-  onPress: () => void;
+  isDisabled: boolean;
+  onPress?: () => void;
 }
 
-const Button = ({ children, onPress }: ButtonProps) => (
-  <ButtonComponent onPress={onPress}>
+const Button = ({
+  children,
+  isDisabled = false,
+  onPress,
+  ...otherProps
+}: ButtonProps) => (
+  <ButtonComponent
+    disabled={isDisabled}
+    isDisabled={isDisabled}
+    onPress={onPress}
+    {...otherProps}>
     <ButtonComponentText>{children}</ButtonComponentText>
   </ButtonComponent>
 );
