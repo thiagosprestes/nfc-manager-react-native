@@ -27,17 +27,23 @@ export const Info = styled.View`
 export const Title = styled(Text)`
   color: ${colors.white};
   font-weight: bold;
-  font-size: 22px;
+  font-size: 18px;
   text-align: center;
-  margin: 10px 0;
+  margin: 16px 0;
 `;
 
-export const DescriptionItem = styled(Text)`
+export const DescriptionItem = styled.View`
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const DescriptionItemLabel = styled(Text)`
   color: ${colors.white};
-  font-size: 16px;
 `;
 
 export const DescriptionItemValue = styled(Text)`
+  font-size: 20px;
+  color: ${colors.white};
   font-weight: bold;
 `;
 
