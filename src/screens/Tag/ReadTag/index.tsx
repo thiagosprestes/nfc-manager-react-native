@@ -35,7 +35,8 @@ const ReadTagScreen = ({ navigation }: ReadTagScreenProps) => {
   useEffect(() => {
     if (nfcState === NfcState.error) {
       unregisterNfcEvent();
-      setErrorType(ErrorType.error);
+      setErrorType(ErrorType.notFound);
+      setComponentStates(ComponentStates.error);
     }
   }, [nfcState]);
 

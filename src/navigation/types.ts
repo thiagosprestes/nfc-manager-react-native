@@ -13,7 +13,7 @@ export type AppStackParamsList = {
   [AppRoutes.TagInfo]: {
     tagData: string;
   };
-  [AppRoutes.EnableNfc]: undefined;
+  [AppRoutes.EnableNfc]: { nextScreen: keyof AppStackParamsList };
   [AppRoutes.DeviceNotHaveNfc]: undefined;
   [AppRoutes.WriteTag]: undefined;
 };

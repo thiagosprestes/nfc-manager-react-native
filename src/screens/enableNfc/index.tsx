@@ -7,18 +7,22 @@ import {
 } from '../../utils/nativeModules/nfcManager';
 import { EnableNfc } from './container';
 import { AppState } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
 
 interface EnableNfcProps {
-  navigation: NativeStackNavigationProp<AppStackParamsList, 'App.ReadTag'>;
+  navigation: NativeStackNavigationProp<AppStackParamsList, 'App.EnableNfc'>;
+  route: RouteProp<AppStackParamsList, 'App.EnableNfc'>;
 }
 
-const EnableNfcScreen = ({ navigation }: EnableNfcProps) => {
+const EnableNfcScreen = ({ navigation, route }: EnableNfcProps) => {
+  const { nextScreen } = route.params;
+
   const handleOnGoToEnableNfc = async () => {
     onGoToEnableNfc();
   };
 
   const checkIfNfcIsEnabled = async () => {
-    if (await isNfcEnabled()) navigation.replace(AppRoutes.ReadTag);
+    if (await isNfcEnabled()) navigation.replace(nextScreen);
   };
 
   useEffect(() => {

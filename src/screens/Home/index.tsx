@@ -42,21 +42,24 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
     },
   ];
 
-  const verifyIfNfcIsEnabled = async () => {
+  const handleOnGoToReadTag = async () => {
     if (!(await isNfcEnabled())) {
-      navigation.navigate(AppRoutes.EnableNfc);
+      navigation.navigate(AppRoutes.EnableNfc, {
+        nextScreen: AppRoutes.ReadTag,
+      });
       return;
     }
-  };
-
-  const handleOnGoToReadTag = async () => {
-    await verifyIfNfcIsEnabled();
 
     navigation.navigate(AppRoutes.ReadTag);
   };
 
   const handleOnToWriteTag = async () => {
-    await verifyIfNfcIsEnabled();
+    if (!(await isNfcEnabled())) {
+      navigation.navigate(AppRoutes.EnableNfc, {
+        nextScreen: AppRoutes.WriteTag,
+      });
+      return;
+    }
 
     navigation.navigate(AppRoutes.WriteTag);
   };
