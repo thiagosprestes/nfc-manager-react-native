@@ -1,10 +1,9 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { useEffect, useRef, useState } from 'react';
-import { NativeEventEmitter } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { NfcState, useNfc } from '../../../hooks/useNfc';
 import { AppRoutes, AppStackParamsList } from '../../../navigation/types';
 import { ComponentStates, ErrorType } from '../../../types';
 import {
-  NfcManagerModule,
   registerNfcEvent,
   unregisterNfcEvent,
 } from '../../../utils/nativeModules/nfcManager';
@@ -20,9 +19,7 @@ const ReadTagScreen = ({ navigation }: ReadTagScreenProps) => {
   );
   const [errorType, setErrorType] = useState(ErrorType.error);
 
-  const readTagTimeout = useRef(15000);
-
-  const eventEmitter = new NativeEventEmitter(NfcManagerModule);
+  const { nfcState, tag } = useNfc();
 
   const onFoundTag = (tagData: string) => {
     navigation.replace(AppRoutes.TagInfo, {
@@ -31,32 +28,22 @@ const ReadTagScreen = ({ navigation }: ReadTagScreenProps) => {
   };
 
   const handleOnRetryRead = () => {
+    registerNfcEvent();
     setComponentStates(ComponentStates.default);
   };
 
-  const onSetReadTimeout = () => {
-    setTimeout(() => {
-      setErrorType(ErrorType.notFound);
-      setComponentStates(ComponentStates.error);
-    }, readTagTimeout.current);
-  };
+  useEffect(() => {
+    if (nfcState === NfcState.error) {
+      unregisterNfcEvent();
+      setErrorType(ErrorType.error);
+    }
+  }, [nfcState]);
 
   useEffect(() => {
-    const eventListener = eventEmitter.addListener(
-      'hasDiscoveredNfcTag',
-      event => {
-        onFoundTag(event.tagData);
-      },
-    );
-
-    onSetReadTimeout();
-    registerNfcEvent();
-
-    return () => {
-      eventListener.remove();
-      clearTimeout(readTagTimeout.current);
-    };
-  }, []);
+    if (tag) {
+      onFoundTag(tag!);
+    }
+  }, [tag]);
 
   return (
     <ReadTag

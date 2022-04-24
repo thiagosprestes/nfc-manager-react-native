@@ -20,6 +20,7 @@ export enum WriteTagSteps {
   options = 'options',
   content = 'content',
   write = 'write',
+  success = 'success',
 }
 
 export enum WriteOptions {

@@ -4,7 +4,7 @@ import { ButtonComponent, ButtonComponentText } from './styles';
 
 interface ButtonProps extends TouchableOpacityProps {
   children: ReactNode;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   onPress?: () => void;
 }
 

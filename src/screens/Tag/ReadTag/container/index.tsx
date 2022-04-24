@@ -1,10 +1,8 @@
-import AnimatedLottieView from 'lottie-react-native';
 import React from 'react';
-import { Container, Text } from './styles';
-import readingNfcAnimation from '../../../../assets/animations/readingNfc.json';
-import { View } from 'react-native';
+import { Container } from './styles';
 import { ComponentStates, ErrorType } from '../../../../types';
 import { Error } from '../../../../components/Error';
+import Reading from '../../../../components/Reading';
 
 interface ReadTagProps {
   componentStates: ComponentStates;
@@ -13,19 +11,7 @@ interface ReadTagProps {
 }
 
 const ReadTag = ({ componentStates, errorType, onRetryRead }: ReadTagProps) => {
-  const DefaultState = (
-    <>
-      <View style={{ height: 200, transform: [{ rotate: '90deg' }] }}>
-        <AnimatedLottieView
-          source={readingNfcAnimation}
-          autoPlay
-          loop
-          resizeMode="contain"
-        />
-      </View>
-      <Text>Aproxime uma tag ao leitor de NFC do seu smartphone</Text>
-    </>
-  );
+  const DefaultState = <Reading />;
 
   return (
     <Container>
