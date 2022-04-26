@@ -15,10 +15,11 @@ import { colors } from '../../../../styles';
 
 interface TagInfo {
   onReadAgain: () => void;
+  onShare: () => void;
   tagData: string;
 }
 
-const TagInfo = ({ onReadAgain, tagData }: TagInfo) => (
+const TagInfo = ({ onReadAgain, onShare, tagData }: TagInfo) => (
   <Container>
     <Content>
       <MaterialCommunityIcons
@@ -33,7 +34,7 @@ const TagInfo = ({ onReadAgain, tagData }: TagInfo) => (
       </DescriptionItem>
     </Content>
     <Actions>
-      <ActionItem>
+      <ActionItem onPress={onShare}>
         <MaterialCommunityIcons
           name="share-variant"
           size={32}
