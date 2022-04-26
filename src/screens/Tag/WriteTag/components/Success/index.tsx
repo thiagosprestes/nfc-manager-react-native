@@ -1,14 +1,15 @@
 import React from 'react';
-import { Container, Content, Text } from './styles';
+import { Container, Content, Text, Title } from './styles';
 import { colors } from '../../../../../styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from '../../../../../components/Button';
 
 interface SuccessProps {
   onNext: () => void;
+  writtenData: string;
 }
 
-const Success = ({ onNext }: SuccessProps) => (
+const Success = ({ onNext, writtenData }: SuccessProps) => (
   <Container>
     <Content>
       <MaterialCommunityIcons
@@ -16,7 +17,8 @@ const Success = ({ onNext }: SuccessProps) => (
         name="check-bold"
         size={65}
       />
-      <Text>Conteúdo escrito com sucesso!</Text>
+      <Title>Conteúdo escrito com sucesso!</Title>
+      <Text>{writtenData}</Text>
     </Content>
     <Button onPress={onNext}>Concluir</Button>
   </Container>

@@ -12,10 +12,16 @@ export const Content = styled.View`
   align-items: center;
 `;
 
-export const Text = styled(TextComponent)`
+export const Title = styled(TextComponent)`
   font-size: 22px;
-  margin-top: 10px;
+  margin: 10px 0;
   font-weight: bold;
+  color: ${colors.white};
+  text-align: center;
+`;
+
+export const Text = styled(TextComponent)`
+  font-size: 16px;
   color: ${colors.white};
   text-align: center;
 `;

@@ -3,18 +3,16 @@ import { Container } from './styles';
 import { NfcState, useNfc } from '../../../../../hooks/useNfc';
 import { Error } from '../../../../../components/Error';
 import { ErrorType } from '../../../../../types';
-import {
-  registerNfcEvent,
-  unregisterNfcEvent,
-} from '../../../../../utils/nativeModules/nfcManager';
+import { unregisterNfcEvent } from '../../../../../utils/nativeModules/nfcManager';
 import Reading from '../../../../../components/Reading';
 
 interface WriteProps {
   onNext: (tagInfo: string) => void;
+  text: string;
 }
 
-const Write = ({ onNext }: WriteProps) => {
-  const { nfcState, tag } = useNfc();
+const Write = ({ onNext, text }: WriteProps) => {
+  const { nfcState, tag, writeNfc, writeWithSuccess } = useNfc();
 
   const [writeState, setWriteState] = useState(nfcState);
 
@@ -32,9 +30,19 @@ const Write = ({ onNext }: WriteProps) => {
   }, [tag]);
 
   const handleOnRetry = () => {
-    registerNfcEvent();
+    writeNfc(text);
     setWriteState(NfcState.default);
   };
+
+  useEffect(() => {
+    writeNfc(text);
+  }, []);
+
+  useEffect(() => {
+    if (writeWithSuccess) {
+      onNext(tag!);
+    }
+  }, [writeWithSuccess]);
 
   const defaultState = <Reading />;
 

@@ -19,7 +19,7 @@ const ReadTagScreen = ({ navigation }: ReadTagScreenProps) => {
   );
   const [errorType, setErrorType] = useState(ErrorType.error);
 
-  const { nfcState, tag } = useNfc();
+  const { nfcState, readNfc, tag } = useNfc();
 
   const onFoundTag = (tagData: string) => {
     navigation.replace(AppRoutes.TagInfo, {
@@ -45,6 +45,10 @@ const ReadTagScreen = ({ navigation }: ReadTagScreenProps) => {
       onFoundTag(tag!);
     }
   }, [tag]);
+
+  useEffect(() => {
+    readNfc();
+  }, []);
 
   return (
     <ReadTag

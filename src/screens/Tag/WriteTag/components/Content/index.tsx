@@ -1,28 +1,26 @@
-import React, { useState } from 'react';
-import { WriteOptions } from '../../../../../types';
+import React from 'react';
 import { Container, Form, TextInput, Title } from './styles';
 import { Button } from '../../../../../components/Button';
+import { WriteOptions } from '../../../../../types';
 
 interface ContentProps {
   onNext: () => void;
   selectedOption?: WriteOptions;
+  onChangeText: (data: string) => void;
+  text: string;
 }
 
-const Content = ({ onNext, selectedOption }: ContentProps) => {
-  const textInitalState = {
-    [WriteOptions.location]: '',
-    [WriteOptions.phoneNumber]: '',
-    [WriteOptions.text]: '',
-    [WriteOptions.url]: 'https://',
-  }[selectedOption!];
-
-  const [text, setText] = useState(textInitalState);
-
+const Content = ({
+  onNext,
+  selectedOption,
+  onChangeText,
+  text,
+}: ContentProps) => {
   const TextForm = (
     <>
       <Form>
         <Title>Qual texto deseja escrever na tag?</Title>
-        <TextInput onChangeText={text => setText(text)} value={text} />
+        <TextInput onChangeText={text => onChangeText(text)} value={text} />
       </Form>
       <Button isDisabled={text === ''} onPress={onNext}>
         Continuar
@@ -30,19 +28,9 @@ const Content = ({ onNext, selectedOption }: ContentProps) => {
     </>
   );
 
-  const UrlForm = (
-    <>
-      <Form>
-        <Title>Insira a URL que deseja escrever na tag</Title>
-        <TextInput onChangeText={text => setText(text)} value={text} />
-      </Form>
-      <Button isDisabled={text === ''} onPress={onNext}>
-        Continuar
-      </Button>
-    </>
-  );
+  const UrlForm = <></>;
 
-  const phoneNumberform = <Container></Container>;
+  const phoneNumberform = <></>;
 
   return (
     <Container>

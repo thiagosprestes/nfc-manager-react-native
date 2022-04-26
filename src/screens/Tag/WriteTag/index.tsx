@@ -13,6 +13,8 @@ const WriteTagScreen = ({ navigation }: WriteTagScreenProps) => {
   const [selectedWriteOption, setSelectedWriteOption] =
     useState<WriteOptions>();
 
+  const [text, setText] = useState('');
+
   const handleOnSelectWriteOption = (option: WriteOptions) => {
     setStep(WriteTagSteps.content);
     setSelectedWriteOption(option);
@@ -33,6 +35,10 @@ const WriteTagScreen = ({ navigation }: WriteTagScreenProps) => {
     navigation.navigate(AppRoutes.Home);
   };
 
+  const handleOnChangeText = (data: string) => {
+    setText(data);
+  };
+
   return (
     <WriteTag
       onFinish={handleOnFinish}
@@ -40,6 +46,8 @@ const WriteTagScreen = ({ navigation }: WriteTagScreenProps) => {
       onSelectOption={handleOnSelectWriteOption}
       selectedOption={selectedWriteOption}
       step={step}
+      text={text}
+      onChangeText={handleOnChangeText}
     />
   );
 };

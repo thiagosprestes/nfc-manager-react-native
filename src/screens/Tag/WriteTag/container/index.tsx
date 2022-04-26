@@ -12,6 +12,8 @@ interface WriteTagProps {
   onSelectOption: (option: WriteOptions) => void;
   selectedOption?: WriteOptions;
   step: WriteTagSteps;
+  text: string;
+  onChangeText: (data: string) => void;
 }
 
 const WriteTag = ({
@@ -20,16 +22,23 @@ const WriteTag = ({
   onSelectOption,
   selectedOption,
   step,
+  text,
+  onChangeText,
 }: WriteTagProps) => {
   const WriteOptions = <Options onSelectOption={onSelectOption} />;
 
   const InsertContent = (
-    <Content onNext={onNext} selectedOption={selectedOption} />
+    <Content
+      onNext={onNext}
+      selectedOption={selectedOption}
+      onChangeText={onChangeText}
+      text={text}
+    />
   );
 
-  const WriteTag = <Write onNext={onNext} />;
+  const WriteTag = <Write text={text} onNext={onNext} />;
 
-  const WriteSuccess = <Success onNext={onFinish} />;
+  const WriteSuccess = <Success onNext={onFinish} writtenData={text} />;
 
   return (
     <Container>
