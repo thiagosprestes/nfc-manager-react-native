@@ -2,6 +2,10 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { AppRoutes, AppStackParamsList } from '../../../navigation/types';
 import { WriteOptions, WriteTagSteps } from '../../../types';
+import {
+  isNfcEnabled,
+  onGoToEnableNfc,
+} from '../../../utils/nativeModules/nfcManager';
 import { WriteTag } from './container';
 
 interface WriteTagScreenProps {
@@ -20,13 +24,19 @@ const WriteTagScreen = ({ navigation }: WriteTagScreenProps) => {
     setSelectedWriteOption(option);
   };
 
-  const handleOnNext = () => {
+  const handleOnNext = async () => {
     const switchSteps = {
       [WriteTagSteps.options]: WriteTagSteps.content,
       [WriteTagSteps.content]: WriteTagSteps.write,
       [WriteTagSteps.write]: WriteTagSteps.success,
       [WriteTagSteps.success]: WriteTagSteps.success,
     };
+
+    if (step === WriteTagSteps.content && !(await isNfcEnabled())) {
+      navigation.navigate(AppRoutes.EnableNfc, {
+        nextScreen: AppRoutes.WriteTag,
+      });
+    }
 
     setStep(switchSteps[step]);
   };

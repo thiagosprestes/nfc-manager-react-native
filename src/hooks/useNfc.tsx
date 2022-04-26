@@ -17,7 +17,7 @@ const useNfc = () => {
   const [writeWithSuccess, setWriteWithSuccess] = useState(false);
 
   const eventEmitter = new NativeEventEmitter(NfcManagerModule);
-  const readTagTimeout = useRef(5000);
+  const readTagTimeout = useRef(15000);
 
   const onReadTimeout = () => {
     setTimeout(() => {
