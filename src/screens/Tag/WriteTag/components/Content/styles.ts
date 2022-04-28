@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { Text } from '../../../../../components/Text/styles';
-import { colors } from '../../../../../styles';
+import { colors, defaultSize, titleSize } from '../../../../../styles';
 
 export const Container = styled.View`
   flex: 1;
@@ -13,7 +13,7 @@ export const TextInput = styled.TextInput`
   color: ${colors.white};
   font-weight: bold;
   font-family: 'Roboto-Regular';
-  font-size: 14px;
+  font-size: ${defaultSize};
 `;
 
 export const Form = styled.View`
@@ -25,6 +25,6 @@ export const Title = styled(Text)`
   text-align: center;
   color: ${colors.white};
   font-weight: bold;
-  font-size: 18px;
+  font-size: ${titleSize};
   margin-bottom: 28px;
 `;

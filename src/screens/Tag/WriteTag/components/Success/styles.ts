@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { Text as TextComponent } from '../../../../../components/Text/styles';
-import { colors } from '../../../../../styles';
+import { colors, mediumTextSize, titleSize } from '../../../../../styles';
 
 export const Container = styled.View`
   flex: 1;
@@ -13,7 +13,7 @@ export const Content = styled.View`
 `;
 
 export const Title = styled(TextComponent)`
-  font-size: 22px;
+  font-size: ${titleSize};
   margin: 10px 0;
   font-weight: bold;
   color: ${colors.white};
@@ -21,7 +21,7 @@ export const Title = styled(TextComponent)`
 `;
 
 export const Text = styled(TextComponent)`
-  font-size: 16px;
+  font-size: ${mediumTextSize};
   color: ${colors.white};
   text-align: center;
 `;

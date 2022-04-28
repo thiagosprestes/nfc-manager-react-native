@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { Text } from '../../../components/Text/styles';
-import { colors, defaultPadding } from '../../../styles';
+import { colors, defaultPadding, titleSize } from '../../../styles';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -16,7 +16,7 @@ export const EnableNfcInfo = styled.View`
 `;
 
 export const Title = styled(Text)`
-  font-size: 22px;
+  font-size: ${titleSize};
   margin: 10px 0;
   font-weight: bold;
   color: ${colors.white};

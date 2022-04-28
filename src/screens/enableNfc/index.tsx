@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { AppRoutes, AppStackParamsList } from '../../navigation/types';
+import { AppStackParamsList } from '../../navigation/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   isNfcEnabled,

@@ -2,10 +2,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { AppRoutes, AppStackParamsList } from '../../../navigation/types';
 import { WriteOptions, WriteTagSteps } from '../../../types';
-import {
-  isNfcEnabled,
-  onGoToEnableNfc,
-} from '../../../utils/nativeModules/nfcManager';
+import { isNfcEnabled } from '../../../utils/nativeModules/nfcManager';
 import { WriteTag } from './container';
 
 interface WriteTagScreenProps {

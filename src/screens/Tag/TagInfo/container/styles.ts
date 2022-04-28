@@ -1,6 +1,12 @@
 import styled from 'styled-components/native';
 import { Text } from '../../../../components/Text/styles';
-import { colors, defaultPadding } from '../../../../styles';
+import {
+  colors,
+  defaultPadding,
+  smallTextSize,
+  subtitleSize,
+  titleSize,
+} from '../../../../styles';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -27,7 +33,7 @@ export const Info = styled.View`
 export const Title = styled(Text)`
   color: ${colors.white};
   font-weight: bold;
-  font-size: 18px;
+  font-size: ${titleSize};
   text-align: center;
   margin: 16px 0;
 `;
@@ -42,7 +48,7 @@ export const DescriptionItemLabel = styled(Text)`
 `;
 
 export const DescriptionItemValue = styled(Text)`
-  font-size: 20px;
+  font-size: ${subtitleSize};
   color: ${colors.white};
   font-weight: bold;
 `;
@@ -63,5 +69,5 @@ export const ActionItem = styled.TouchableOpacity`
 export const ActionItemName = styled(Text)`
   font-weight: bold;
   color: ${colors.black};
-  font-size: 12px;
+  font-size: ${smallTextSize};
 `;

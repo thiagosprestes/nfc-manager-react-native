@@ -1,9 +1,7 @@
-import { Dimensions, FlatList, StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 import { Text as TextComponent } from '../../../components/Text/styles';
-import { colors } from '../../../styles';
-
-const width = Dimensions.get('window').width - 40;
+import { colors, deviceWidth } from '../../../styles';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -16,7 +14,7 @@ export const Feature = styled.TouchableOpacity`
   background-color: ${colors.white};
   padding: 30px;
   border-radius: 8px;
-  width: ${width / 2 - 10}px;
+  width: ${deviceWidth / 2 - 10}px;
   align-items: center;
 `;
 

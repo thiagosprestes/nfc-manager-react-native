@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { Text as TextComponent } from '../../../../../components/Text/styles';
-import { colors } from '../../../../../styles';
+import { colors, titleSize } from '../../../../../styles';
 
 export const Container = styled.View`
   flex: 1;
@@ -8,7 +8,7 @@ export const Container = styled.View`
 `;
 
 export const Text = styled(TextComponent)`
-  font-size: 22px;
+  font-size: ${titleSize};
   margin-top: 10px;
   font-weight: bold;
   color: ${colors.white};

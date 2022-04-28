@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from './styles';
-import { NfcState, useNfc } from '../../../../../hooks/useNfc';
+import {
+  NfcState,
+  useNfc,
+  WrittenOptionValue,
+} from '../../../../../hooks/useNfc';
 import { Error } from '../../../../../components/Error';
 import { ErrorType, WriteOptions } from '../../../../../types';
 import { unregisterNfcEvent } from '../../../../../utils/nativeModules/nfcManager';
@@ -18,7 +22,12 @@ const Write = ({ onNext, selectedOption, text }: WriteProps) => {
   const [writeState, setWriteState] = useState(nfcState);
 
   const handleOnWrite = () => {
-    writeNfc(text, selectedOption === WriteOptions.text ? 'text' : 'url');
+    writeNfc(
+      text,
+      selectedOption === WriteOptions.text
+        ? WrittenOptionValue.text
+        : WrittenOptionValue.url,
+    );
     setWriteState(NfcState.default);
   };
 

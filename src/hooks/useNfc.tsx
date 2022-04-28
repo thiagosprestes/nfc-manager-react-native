@@ -11,6 +11,16 @@ export enum NfcState {
   error = 'error',
 }
 
+enum NativeEventType {
+  hasDiscoveredNfcTag = 'hasDiscoveredNfcTag',
+  hasWrittenTag = 'hasWrittenTag',
+}
+
+export enum WrittenOptionValue {
+  text = 'text',
+  url = 'url',
+}
+
 const useNfc = () => {
   const [tag, setTag] = useState<string>();
   const [nfcState, setNfcState] = useState(NfcState.default);
@@ -27,7 +37,7 @@ const useNfc = () => {
 
   const readNfc = () => {
     const eventListener = eventEmitter.addListener(
-      'hasDiscoveredNfcTag',
+      NativeEventType.hasDiscoveredNfcTag,
       event => {
         setTag(event.tagData);
       },
@@ -42,10 +52,13 @@ const useNfc = () => {
     };
   };
 
-  const writeNfc = (data: string, selectedOption: string) => {
-    const eventListener = eventEmitter.addListener('hasWrittenTag', () => {
-      setWriteWithSuccess(true);
-    });
+  const writeNfc = (data: string, selectedOption: WrittenOptionValue) => {
+    const eventListener = eventEmitter.addListener(
+      NativeEventType.hasWrittenTag,
+      () => {
+        setWriteWithSuccess(true);
+      },
+    );
 
     onReadTimeout();
     writeNfcTag(data, selectedOption);
