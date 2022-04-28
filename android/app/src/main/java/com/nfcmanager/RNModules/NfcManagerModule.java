@@ -49,6 +49,8 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
 
     private final ReactApplicationContext reactContext;
 
+    int NfcFlags = NfcAdapter.FLAG_READER_NFC_A | NfcAdapter.FLAG_READER_NFC_B;
+
     public NfcManagerModule(ReactApplicationContext reactContext) {
         super(reactContext);
         context = reactContext;
@@ -68,6 +70,18 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
         reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(eventName, tagData);
     }
 
+    public void onGetTagData(Tag tag) {
+        Ndef mNdef = Ndef.get(tag);
+        NdefMessage mNdefMessage = mNdef.getCachedNdefMessage();
+        byte[] tagPayload = mNdefMessage.getRecords()[0].getPayload();
+        byte[] tagTextArray = Arrays.copyOfRange(tagPayload, (int) tagPayload[0] + 1, tagPayload.length);
+
+        WritableMap nfcDataPayload = Arguments.createMap();
+        nfcDataPayload.putString("tagData", new String(tagTextArray));
+
+        sendEvent("hasDiscoveredNfcTag", reactContext, nfcDataPayload);
+    }
+
     @ReactMethod
     private void registerNfcEvent() {
         NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
@@ -76,25 +90,42 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
 
         NfcAdapter.ReaderCallback callback;
 
-        int NfcFlags = NfcAdapter.FLAG_READER_NFC_A | NfcAdapter.FLAG_READER_NFC_B;
-
         Bundle options = new Bundle();
 
         options.putInt(NfcAdapter.EXTRA_READER_PRESENCE_CHECK_DELAY, 1000);
 
-        callback = tag -> {
-            Ndef mNdef = Ndef.get(tag);
-            NdefMessage mNdefMessage = mNdef.getCachedNdefMessage();
-            byte[] tagPayload = mNdefMessage.getRecords()[0].getPayload();
-            byte[] tagTextArray = Arrays.copyOfRange(tagPayload, (int) tagPayload[0] + 1, tagPayload.length);
-
-            WritableMap nfcDataPayload = Arguments.createMap();
-            nfcDataPayload.putString("tagData", new String(tagTextArray));
-
-            sendEvent("hasDiscoveredNfcTag", reactContext, nfcDataPayload);
-        };
+        callback = tag -> onGetTagData(tag);
 
         nfcAdapter.enableReaderMode(currentActivity, callback, NfcFlags, options);
+    }
+
+    public void onDiscoverTag(String data, Tag tag, String type) {
+        Ndef mNdef = Ndef.get(tag);
+        NdefRecord record;
+
+        switch (type) {
+            case "url":
+                record = NdefRecord.createUri(data);
+                break;
+            default:
+                record = NdefRecord.createTextRecord("en", data);
+        }
+
+        NdefMessage message = new NdefMessage(record);
+
+        try {
+            mNdef.connect();
+            mNdef.writeNdefMessage(message);
+
+            WritableMap nfcDataPayload = Arguments.createMap();
+            nfcDataPayload.putString("writtenData", data);
+
+            sendEvent("hasWrittenTag", reactContext, nfcDataPayload);
+        } catch (FormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @ReactMethod
@@ -103,44 +134,11 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
 
         Activity currentActivity = getCurrentActivity();
 
-        NfcAdapter.ReaderCallback callback;
-
-        int NfcFlags = NfcAdapter.FLAG_READER_NFC_A | NfcAdapter.FLAG_READER_NFC_B;
+        NfcAdapter.ReaderCallback callback = tag -> onDiscoverTag(data, tag, type);
 
         Bundle options = new Bundle();
 
         options.putInt(NfcAdapter.EXTRA_READER_PRESENCE_CHECK_DELAY, 1000);
-
-        callback = tag -> {
-            Ndef mNdef = Ndef.get(tag);
-
-            NdefRecord record;
-
-            switch (type) {
-                case "text": record = NdefRecord.createTextRecord("en", data);
-                    break;
-                case "url": record = NdefRecord.createUri(data);
-                    break;
-                default:
-                    case "": record = NdefRecord.createTextRecord("en", data);
-            }
-
-            NdefMessage message = new NdefMessage(record);
-
-            try {
-                mNdef.connect();
-                mNdef.writeNdefMessage(message);
-
-                WritableMap nfcDataPayload = Arguments.createMap();
-                nfcDataPayload.putString("writtenData", data);
-
-                sendEvent("hasWrittenTag", reactContext, nfcDataPayload);
-            } catch (FormatException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        };
 
         nfcAdapter.enableReaderMode(currentActivity, callback, NfcFlags, options);
     }
