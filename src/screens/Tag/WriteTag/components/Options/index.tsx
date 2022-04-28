@@ -55,6 +55,9 @@ const Options = ({ onSelectOption }: OptionsProps) => {
     },
   ];
 
+  const isOptionDisabled = (itemName: string) =>
+    itemName !== WriteOptions.text && itemName !== WriteOptions.url;
+
   return (
     <Container>
       <Title>O que deseja escrever na sua tag?</Title>
@@ -64,8 +67,8 @@ const Options = ({ onSelectOption }: OptionsProps) => {
         numColumns={2}
         renderItem={({ item }: { item: WriteOptionsListItem }) => (
           <Option
-            disabled={item.name !== WriteOptions.text}
-            isDisabled={item.name !== WriteOptions.text}
+            disabled={isOptionDisabled(item.name)}
+            isDisabled={isOptionDisabled(item.name)}
             onPress={() => onSelectOption(item.name)}>
             {item.icon}
             <Name>{item.name}</Name>

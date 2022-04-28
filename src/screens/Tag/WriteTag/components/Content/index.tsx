@@ -28,7 +28,17 @@ const Content = ({
     </>
   );
 
-  const UrlForm = <></>;
+  const UrlForm = (
+    <>
+      <Form>
+        <Title>Qual link você deseja escrever na tag?</Title>
+        <TextInput onChangeText={text => onChangeText(text)} value={text} />
+      </Form>
+      <Button isDisabled={text === ''} onPress={onNext}>
+        Continuar
+      </Button>
+    </>
+  );
 
   const phoneNumberform = <></>;
 

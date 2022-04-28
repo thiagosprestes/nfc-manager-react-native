@@ -36,7 +36,9 @@ const WriteTag = ({
     />
   );
 
-  const WriteTag = <Write text={text} onNext={onNext} />;
+  const WriteTag = (
+    <Write text={text} onNext={onNext} selectedOption={selectedOption} />
+  );
 
   const WriteSuccess = <Success onNext={onFinish} writtenData={text} />;
 

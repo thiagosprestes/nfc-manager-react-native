@@ -2,19 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { Container } from './styles';
 import { NfcState, useNfc } from '../../../../../hooks/useNfc';
 import { Error } from '../../../../../components/Error';
-import { ErrorType } from '../../../../../types';
+import { ErrorType, WriteOptions } from '../../../../../types';
 import { unregisterNfcEvent } from '../../../../../utils/nativeModules/nfcManager';
 import Reading from '../../../../../components/Reading';
 
 interface WriteProps {
   onNext: (tagInfo: string) => void;
+  selectedOption?: WriteOptions;
   text: string;
 }
 
-const Write = ({ onNext, text }: WriteProps) => {
+const Write = ({ onNext, selectedOption, text }: WriteProps) => {
   const { nfcState, tag, writeNfc, writeWithSuccess } = useNfc();
 
   const [writeState, setWriteState] = useState(nfcState);
+
+  const handleOnWrite = () => {
+    writeNfc(text, selectedOption === WriteOptions.text ? 'text' : 'url');
+    setWriteState(NfcState.default);
+  };
 
   useEffect(() => {
     if (nfcState === NfcState.error) {
@@ -29,13 +35,8 @@ const Write = ({ onNext, text }: WriteProps) => {
     }
   }, [tag]);
 
-  const handleOnRetry = () => {
-    writeNfc(text);
-    setWriteState(NfcState.default);
-  };
-
   useEffect(() => {
-    writeNfc(text);
+    handleOnWrite();
   }, []);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ const Write = ({ onNext, text }: WriteProps) => {
   const defaultState = <Reading />;
 
   const errorState = (
-    <Error type={ErrorType.notFound} onRetry={handleOnRetry} />
+    <Error type={ErrorType.notFound} onRetry={handleOnWrite} />
   );
 
   return (

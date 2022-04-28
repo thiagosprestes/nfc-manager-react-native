@@ -98,7 +98,7 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
     }
 
     @ReactMethod
-    private void writeNfcTag(String data) {
+    private void writeNfcTag(String data, String type) {
         NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
 
         Activity currentActivity = getCurrentActivity();
@@ -113,7 +113,18 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
 
         callback = tag -> {
             Ndef mNdef = Ndef.get(tag);
-            NdefRecord record = NdefRecord.createTextRecord("en", data);
+
+            NdefRecord record;
+
+            switch (type) {
+                case "text": record = NdefRecord.createTextRecord("en", data);
+                    break;
+                case "url": record = NdefRecord.createUri(data);
+                    break;
+                default:
+                    case "": record = NdefRecord.createTextRecord("en", data);
+            }
+
             NdefMessage message = new NdefMessage(record);
 
             try {

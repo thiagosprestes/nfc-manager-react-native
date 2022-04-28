@@ -42,13 +42,13 @@ const useNfc = () => {
     };
   };
 
-  const writeNfc = (data: string) => {
+  const writeNfc = (data: string, selectedOption: string) => {
     const eventListener = eventEmitter.addListener('hasWrittenTag', () => {
       setWriteWithSuccess(true);
     });
 
     onReadTimeout();
-    writeNfcTag(data);
+    writeNfcTag(data, selectedOption);
 
     return () => {
       eventListener.remove();

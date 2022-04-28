@@ -10,8 +10,8 @@ export const registerNfcEvent = () => {
   return NfcManagerModule.registerNfcEvent();
 };
 
-export const writeNfcTag = (data: string) => {
-  return NfcManagerModule.writeNfcTag(data);
+export const writeNfcTag = (data: string, type: string) => {
+  return NfcManagerModule.writeNfcTag(data, type);
 };
 
 export const unregisterNfcEvent = () => {
