@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import { Text } from '../../../../../components/Text/styles';
 import {
   colors,
+  defaultPadding,
   deviceWidth,
   mediumTextSize,
   titleSize,
@@ -12,7 +13,12 @@ interface OptionProps {
   isDisabled: boolean;
 }
 
-export const Container = styled.View``;
+export const Container = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${colors.primaryColor};
+  justify-content: center;
+  padding: ${defaultPadding};
+`;
 
 export const Option = styled.TouchableOpacity<OptionProps>`
   background-color: ${colors.white};
@@ -30,6 +36,7 @@ export const Title = styled(Text)`
   font-weight: bold;
   font-size: ${titleSize};
   margin-bottom: 32px;
+  text-align: center;
 `;
 
 export const Name = styled(Text)`

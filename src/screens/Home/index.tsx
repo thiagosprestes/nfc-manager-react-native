@@ -13,7 +13,7 @@ import { ComponentStates } from '../../types';
 import { FeatureOptions } from './types';
 
 interface HomeScreenProps {
-  navigation: NativeStackNavigationProp<AppStackParamsList, 'App.ReadTag'>;
+  navigation: NativeStackNavigationProp<AppStackParamsList, 'App.Home'>;
 }
 
 const HomeScreen = ({ navigation }: HomeScreenProps) => {
@@ -56,12 +56,12 @@ const HomeScreen = ({ navigation }: HomeScreenProps) => {
   const handleOnToWriteTag = async () => {
     if (!(await isNfcEnabled())) {
       navigation.navigate(AppRoutes.EnableNfc, {
-        nextScreen: AppRoutes.WriteTag,
+        nextScreen: AppRoutes.Options,
       });
       return;
     }
 
-    navigation.navigate(AppRoutes.WriteTag);
+    navigation.navigate(AppRoutes.Options);
   };
 
   const hasNfcAdapter = async () => {

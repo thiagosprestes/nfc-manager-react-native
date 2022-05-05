@@ -1,9 +1,16 @@
 import styled from 'styled-components/native';
 import { Text as TextComponent } from '../../../../../components/Text/styles';
-import { colors, mediumTextSize, titleSize } from '../../../../../styles';
+import {
+  colors,
+  defaultPadding,
+  mediumTextSize,
+  titleSize,
+} from '../../../../../styles';
 
 export const Container = styled.View`
   flex: 1;
+  padding: ${defaultPadding};
+  background-color: ${colors.primaryColor};
 `;
 
 export const Content = styled.View`

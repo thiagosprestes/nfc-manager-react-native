@@ -12,7 +12,11 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { colors } from '../styles';
 import { TouchableOpacity } from 'react-native';
 import { EnableNfcScreen } from '../screens/EnableNfc';
-import { WriteTagScreen } from '../screens/Tag/WriteTag';
+import { WriteTagScreen } from '../screens/Tag/WriteTag/Write';
+import { OptionsScreen } from '../screens/Tag/WriteTag/Options';
+import { SuccessScreen } from '../screens/Tag/WriteTag/Success';
+import { TextFormScreen } from '../screens/Tag/WriteTag/TextForm';
+import { UrlForm } from '../screens/Tag/WriteTag/UrlForm';
 
 const tagNavigationOptions = (
   navigation: NativeStackNavigationProp<{}>,
@@ -55,11 +59,14 @@ const Routes = () => (
       name={AppRoutes.EnableNfc}
       component={EnableNfcScreen}
     />
-    <Stack.Screen
-      options={({ navigation }) => tagNavigationOptions(navigation)}
-      name={AppRoutes.WriteTag}
-      component={WriteTagScreen}
-    />
+    <Stack.Group
+      screenOptions={({ navigation }) => tagNavigationOptions(navigation)}>
+      <Stack.Screen name={AppRoutes.Write} component={WriteTagScreen} />
+      <Stack.Screen name={AppRoutes.Options} component={OptionsScreen} />
+      <Stack.Screen name={AppRoutes.Success} component={SuccessScreen} />
+      <Stack.Screen name={AppRoutes.Text} component={TextFormScreen} />
+      <Stack.Screen name={AppRoutes.Url} component={UrlForm} />
+    </Stack.Group>
   </Stack.Navigator>
 );
 

@@ -5,7 +5,7 @@ import { colors, defaultPadding } from '../../styles';
 export const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
-  padding: ${defaultPadding}px;
+  padding: ${defaultPadding};
   background-color: ${colors.primaryColor};
   justify-content: center;
 `;

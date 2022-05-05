@@ -11,7 +11,7 @@ import {
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${colors.primaryColor};
-  padding: ${defaultPadding}px;
+  padding: ${defaultPadding};
 `;
 
 export const Content = styled.View`

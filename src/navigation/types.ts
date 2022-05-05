@@ -1,10 +1,17 @@
+import { WrittenOptionValue } from '../hooks/useNfc';
+import { WriteOptions } from '../types';
+
 export const AppRoutes = {
   Home: 'App.Home',
   ReadTag: 'App.ReadTag',
   TagInfo: 'App.TagInfo',
   EnableNfc: 'App.EnableNfc',
   DeviceNotHaveNfc: 'App.DeviceNotHaveNfc',
-  WriteTag: 'App.WriteTag',
+  Options: 'App.Options',
+  Text: 'App.TextForm',
+  Url: 'App.UrlForm',
+  Write: 'App.Write',
+  Success: 'App.Success',
 } as const;
 
 export type AppStackParamsList = {
@@ -15,5 +22,14 @@ export type AppStackParamsList = {
   };
   [AppRoutes.EnableNfc]: { nextScreen: keyof AppStackParamsList };
   [AppRoutes.DeviceNotHaveNfc]: undefined;
-  [AppRoutes.WriteTag]: undefined;
+  [AppRoutes.Options]: undefined;
+  [AppRoutes.Text]: undefined;
+  [AppRoutes.Url]: undefined;
+  [AppRoutes.Success]: {
+    tag: string;
+  };
+  [AppRoutes.Write]: {
+    tagContent: string;
+    writtenOptionValue: WrittenOptionValue;
+  };
 };

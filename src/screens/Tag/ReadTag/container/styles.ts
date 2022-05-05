@@ -6,7 +6,7 @@ export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${colors.primaryColor};
   justify-content: center;
-  padding: ${defaultPadding}px;
+  padding: ${defaultPadding};
 `;
 
 export const Text = styled(TextComponent)`
