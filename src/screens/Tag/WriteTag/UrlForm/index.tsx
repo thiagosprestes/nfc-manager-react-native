@@ -1,26 +1,34 @@
-import React from 'react';
-import { Container, Form, TextInput, Title } from './styles';
-import { Button } from '../../../../components/Button';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useState } from 'react';
+import { WrittenOptionValue } from '../../../../hooks/useNfc';
+import { AppRoutes, AppStackParamsList } from '../../../../navigation/types';
+import { UrlForm } from './container';
 
-interface UrlFormProps {
-  onChangeText: (data: string) => void;
-  onNext: () => void;
-  text: string;
+interface UrlFormScreenProps {
+  navigation: NativeStackNavigationProp<AppStackParamsList, 'App.UrlForm'>;
 }
 
-const UrlForm = ({ onChangeText, onNext, text }: UrlFormProps) => (
-  <Container>
-    <Form>
-      <Title>Qual link você deseja escrever na tag?</Title>
-      <TextInput
-        onChangeText={inputText => onChangeText(inputText)}
-        value={text}
-      />
-    </Form>
-    <Button isDisabled={text === ''} onPress={onNext}>
-      Continuar
-    </Button>
-  </Container>
-);
+const UrlFormScreen = ({ navigation }: UrlFormScreenProps) => {
+  const [inputText, setInputText] = useState('');
 
-export { UrlForm };
+  const handleOnChangeText = (text: string) => {
+    setInputText(text);
+  };
+
+  const handleOnNext = () => {
+    navigation.navigate(AppRoutes.Write, {
+      tagContent: inputText,
+      writtenOptionValue: WrittenOptionValue.url,
+    });
+  };
+
+  return (
+    <UrlForm
+      onChangeText={handleOnChangeText}
+      onNext={handleOnNext}
+      text={inputText}
+    />
+  );
+};
+
+export { UrlFormScreen };

@@ -1,9 +1,16 @@
 import styled from 'styled-components/native';
-import { Text } from '../../../../components/Text/styles';
-import { colors, defaultSize, titleSize } from '../../../../styles';
+import { Text } from '../../../../../components/Text/styles';
+import {
+  colors,
+  defaultPadding,
+  defaultSize,
+  titleSize,
+} from '../../../../../styles';
 
 export const Container = styled.View`
   flex: 1;
+  padding: ${defaultPadding};
+  background-color: ${colors.primaryColor};
 `;
 
 export const TextInput = styled.TextInput`

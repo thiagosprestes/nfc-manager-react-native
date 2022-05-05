@@ -60,10 +60,11 @@ const Options = ({ onSelectOption }: OptionsProps) => {
 
   return (
     <Container>
-      <Title>O que deseja escrever na sua tag?</Title>
       <OptionsList
         columnWrapperStyle={stylesFromStylesheet.featuresListColumn}
+        contentContainerStyle={{ justifyContent: 'center', flexGrow: 1 }}
         data={items}
+        ListHeaderComponent={<Title>O que deseja escrever na sua tag?</Title>}
         numColumns={2}
         renderItem={({ item }: { item: WriteOptionsListItem }) => (
           <Option
