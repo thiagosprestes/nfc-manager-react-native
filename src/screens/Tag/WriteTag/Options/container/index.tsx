@@ -56,7 +56,7 @@ const Options = ({ onSelectOption }: OptionsProps) => {
   ];
 
   const isOptionDisabled = (itemName: string) =>
-    itemName !== WriteOptions.text && itemName !== WriteOptions.url;
+    itemName === WriteOptions.phoneNumber;
 
   return (
     <Container>

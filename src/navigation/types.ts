@@ -12,6 +12,7 @@ export const AppRoutes = {
   Url: 'App.UrlForm',
   Write: 'App.Write',
   Success: 'App.Success',
+  Location: 'App.Location',
 } as const;
 
 export type AppStackParamsList = {
@@ -25,6 +26,7 @@ export type AppStackParamsList = {
   [AppRoutes.Options]: undefined;
   [AppRoutes.Text]: undefined;
   [AppRoutes.Url]: undefined;
+  [AppRoutes.Location]: undefined;
   [AppRoutes.Success]: {
     tag: string;
   };

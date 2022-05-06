@@ -17,6 +17,7 @@ import { OptionsScreen } from '../screens/Tag/WriteTag/Options';
 import { SuccessScreen } from '../screens/Tag/WriteTag/Success';
 import { TextFormScreen } from '../screens/Tag/WriteTag/TextForm';
 import { UrlFormScreen } from '../screens/Tag/WriteTag/UrlForm';
+import { LocationScreen } from '../screens/Tag/WriteTag/Location';
 
 const tagNavigationOptions = (
   navigation: NativeStackNavigationProp<{}>,
@@ -66,6 +67,7 @@ const Routes = () => (
       <Stack.Screen name={AppRoutes.Success} component={SuccessScreen} />
       <Stack.Screen name={AppRoutes.Text} component={TextFormScreen} />
       <Stack.Screen name={AppRoutes.Url} component={UrlFormScreen} />
+      <Stack.Screen name={AppRoutes.Location} component={LocationScreen} />
     </Stack.Group>
   </Stack.Navigator>
 );

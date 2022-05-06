@@ -25,3 +25,7 @@ export const isNfcEnabled = async () => {
 export const onGoToEnableNfc = () => {
   return NfcManagerModule.onGoToEnableNfc();
 };
+
+export const onEnableLocation = async () => {
+  return await NfcManagerModule.onEnableLocation();
+};

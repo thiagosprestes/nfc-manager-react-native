@@ -13,7 +13,7 @@ const OptionsScreen = ({ navigation }: OptionsScreenProps) => {
     const nextRoute = {
       [WriteOptions.text]: AppRoutes.Text,
       [WriteOptions.url]: AppRoutes.Url,
-      [WriteOptions.location]: AppRoutes.Text,
+      [WriteOptions.location]: AppRoutes.Location,
       [WriteOptions.phoneNumber]: AppRoutes.Text,
     };
 

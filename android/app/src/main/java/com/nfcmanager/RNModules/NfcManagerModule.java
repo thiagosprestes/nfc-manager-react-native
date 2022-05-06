@@ -175,6 +175,15 @@ public class NfcManagerModule extends ReactContextBaseJavaModule implements Acti
         currentActivity.startActivity(intent);
     }
 
+    @ReactMethod
+    private void onEnableLocation() {
+        Activity currentActivity = getCurrentActivity();
+
+        currentActivity.startActivity(
+          new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+        );
+    }
+
     @Override
     public void onHostResume() {
     }
