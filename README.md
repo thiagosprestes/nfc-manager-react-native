@@ -17,18 +17,22 @@ NFC manager
 - [Tecnologias utilizadas](#-Tecnologias-utilizadas)
 - [Rodando o projeto](#-Rodando-o-projeto)
   - [Pré-requisitos](#-Pré-requisitos)
-  - [Rodando a auth-api](#-Rodando-o-app)
 
 ## 🎨 Telas
 
-<img src=".github/soundfy-figma.png" alt="soundfy">
-<h5>Telas do projeto representadas no <a href="https://www.figma.com/file/k8KApRZDxasA7fKrTaTRlL/Sound.Fy?node-id=0%3A1" target="_blank">Figma</a></h5>
+<div>
+<img src=".github/home.png" alt="nfc-manager" width="180">
+<img src=".github/read.png" alt="nfc-manager" width="180">
+<img src=".github/options.png" alt="nfc-manager" width="180">
+<img src=".github/content.png" alt="nfc-manager" width="180">
+<img src=".github/success.png" alt="nfc-manager" width="180">
+</div>
 
 ## 📃 Sobre o projeto
 
 O propósito do app é possibilitar a leitura e gravação de tags NFC, a ideia surgiu a partir do momento em que comecei a estudar sobre como utilizar módulos nativos no React Native.
 
-### 🎶 Funcionalidades
+### 🔎 Funcionalidades
 
 - Ler o conteúdo de tags NFC
 - Gravar texto, links e localização em uma tag NFC
