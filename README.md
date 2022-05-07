@@ -42,7 +42,7 @@ O propósito do app é possibilitar a leitura e gravação de tags NFC, a ideia 
 - ⚛ **React native** - Aplicativo
 - ☕ **Java** - Módulo de manipulação das tags
 - 🛳️ **React navigation** - Navegação
-- 🎇 **Lottie** Animações
+- 🎇 **Lottie** - Animações
 - 💅 **Styled components** - Estilização
 - 😊 **React native vector icons** - Icones
 - 📨 **React native share** - Compartilhar dados da tag lida
